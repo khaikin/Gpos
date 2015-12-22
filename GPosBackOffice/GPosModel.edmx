@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GPosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="udt_Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Code" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_TransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_UnitType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CONF_Global">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VATRate" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="UnitType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_Sta_Register">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_udt_Product_udt_CNV_UnitType">
+          <End Role="udt_CNV_UnitType" Type="Self.udt_CNV_UnitType" Multiplicity="1" />
+          <End Role="udt_Product" Type="Self.udt_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="udt_CNV_UnitType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="udt_Product">
+              <PropertyRef Name="UnitType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_udt_Product_udt_ProductCategory">
+          <End Role="udt_ProductCategory" Type="Self.udt_ProductCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="udt_Product" Type="Self.udt_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="udt_ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="udt_Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPosModelStoreContainer">
+          <EntitySet Name="udt_Client" EntityType="Self.udt_Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_CNV_PaymentType" EntityType="Self.udt_CNV_PaymentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_CNV_TransactionType" EntityType="Self.udt_CNV_TransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_CNV_UnitType" EntityType="Self.udt_CNV_UnitType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_CONF_Global" EntityType="Self.udt_CONF_Global" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_Product" EntityType="Self.udt_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_ProductCategory" EntityType="Self.udt_ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="udt_Sta_Register" EntityType="Self.udt_Sta_Register" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_udt_Product_udt_CNV_UnitType" Association="Self.FK_udt_Product_udt_CNV_UnitType">
+            <End Role="udt_CNV_UnitType" EntitySet="udt_CNV_UnitType" />
+            <End Role="udt_Product" EntitySet="udt_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_udt_Product_udt_ProductCategory" Association="Self.FK_udt_Product_udt_ProductCategory">
+            <End Role="udt_ProductCategory" EntitySet="udt_ProductCategory" />
+            <End Role="udt_Product" EntitySet="udt_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GPosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="udt_Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_TransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_CNV_UnitType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="udt_Product" Relationship="Self.FK_udt_Product_udt_CNV_UnitType" FromRole="udt_CNV_UnitType" ToRole="udt_Product" />
+        </EntityType>
+        <EntityType Name="udt_CONF_Global">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VATRate" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="udt_Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="UnitType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="udt_CNV_UnitType" Relationship="Self.FK_udt_Product_udt_CNV_UnitType" FromRole="udt_Product" ToRole="udt_CNV_UnitType" />
+          <NavigationProperty Name="udt_ProductCategory" Relationship="Self.FK_udt_Product_udt_ProductCategory" FromRole="udt_Product" ToRole="udt_ProductCategory" />
+        </EntityType>
+        <EntityType Name="udt_ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="udt_Product" Relationship="Self.FK_udt_Product_udt_ProductCategory" FromRole="udt_ProductCategory" ToRole="udt_Product" />
+        </EntityType>
+        <EntityType Name="udt_Sta_Register">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_udt_Product_udt_CNV_UnitType">
+          <End Role="udt_CNV_UnitType" Type="Self.udt_CNV_UnitType" Multiplicity="1" />
+          <End Role="udt_Product" Type="Self.udt_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="udt_CNV_UnitType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="udt_Product">
+              <PropertyRef Name="UnitType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_udt_Product_udt_ProductCategory">
+          <End Role="udt_ProductCategory" Type="Self.udt_ProductCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="udt_Product" Type="Self.udt_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="udt_ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="udt_Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GPosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="udt_Client" EntityType="Self.udt_Client" />
+          <EntitySet Name="udt_CNV_PaymentType" EntityType="Self.udt_CNV_PaymentType" />
+          <EntitySet Name="udt_CNV_TransactionType" EntityType="Self.udt_CNV_TransactionType" />
+          <EntitySet Name="udt_CNV_UnitType" EntityType="Self.udt_CNV_UnitType" />
+          <EntitySet Name="udt_CONF_Global" EntityType="Self.udt_CONF_Global" />
+          <EntitySet Name="udt_Product" EntityType="Self.udt_Product" />
+          <EntitySet Name="udt_ProductCategory" EntityType="Self.udt_ProductCategory" />
+          <EntitySet Name="udt_Sta_Register" EntityType="Self.udt_Sta_Register" />
+          <AssociationSet Name="FK_udt_Product_udt_CNV_UnitType" Association="Self.FK_udt_Product_udt_CNV_UnitType">
+            <End Role="udt_CNV_UnitType" EntitySet="udt_CNV_UnitType" />
+            <End Role="udt_Product" EntitySet="udt_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_udt_Product_udt_ProductCategory" Association="Self.FK_udt_Product_udt_ProductCategory">
+            <End Role="udt_ProductCategory" EntitySet="udt_ProductCategory" />
+            <End Role="udt_Product" EntitySet="udt_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GPosModelStoreContainer" CdmEntityContainer="GPosEntities">
+          <EntitySetMapping Name="udt_Client">
+            <EntityTypeMapping TypeName="GPosModel.udt_Client">
+              <MappingFragment StoreEntitySet="udt_Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_CNV_PaymentType">
+            <EntityTypeMapping TypeName="GPosModel.udt_CNV_PaymentType">
+              <MappingFragment StoreEntitySet="udt_CNV_PaymentType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_CNV_TransactionType">
+            <EntityTypeMapping TypeName="GPosModel.udt_CNV_TransactionType">
+              <MappingFragment StoreEntitySet="udt_CNV_TransactionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_CNV_UnitType">
+            <EntityTypeMapping TypeName="GPosModel.udt_CNV_UnitType">
+              <MappingFragment StoreEntitySet="udt_CNV_UnitType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_CONF_Global">
+            <EntityTypeMapping TypeName="GPosModel.udt_CONF_Global">
+              <MappingFragment StoreEntitySet="udt_CONF_Global">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VATRate" ColumnName="VATRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_Product">
+            <EntityTypeMapping TypeName="GPosModel.udt_Product">
+              <MappingFragment StoreEntitySet="udt_Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UnitType" ColumnName="UnitType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_ProductCategory">
+            <EntityTypeMapping TypeName="GPosModel.udt_ProductCategory">
+              <MappingFragment StoreEntitySet="udt_ProductCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udt_Sta_Register">
+            <EntityTypeMapping TypeName="GPosModel.udt_Sta_Register">
+              <MappingFragment StoreEntitySet="udt_Sta_Register">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

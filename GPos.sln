@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPos", "GPos\GPos.csproj", "{5B67CF5E-189E-4441-8E89-8FDCF62073B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPosBackOffice", "GPosBackOffice\GPosBackOffice.csproj", "{9831A398-B996-479A-9C4B-CAB3F4617540}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{7AB8404C-0220-4B6C-B864-54730796A62E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosDal", "PosDal\PosDal.csproj", "{92493F9F-654C-417D-AD24-14D71DFD119E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B67CF5E-189E-4441-8E89-8FDCF62073B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B67CF5E-189E-4441-8E89-8FDCF62073B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B67CF5E-189E-4441-8E89-8FDCF62073B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B67CF5E-189E-4441-8E89-8FDCF62073B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9831A398-B996-479A-9C4B-CAB3F4617540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9831A398-B996-479A-9C4B-CAB3F4617540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9831A398-B996-479A-9C4B-CAB3F4617540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9831A398-B996-479A-9C4B-CAB3F4617540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB8404C-0220-4B6C-B864-54730796A62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB8404C-0220-4B6C-B864-54730796A62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB8404C-0220-4B6C-B864-54730796A62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB8404C-0220-4B6C-B864-54730796A62E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92493F9F-654C-417D-AD24-14D71DFD119E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92493F9F-654C-417D-AD24-14D71DFD119E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92493F9F-654C-417D-AD24-14D71DFD119E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92493F9F-654C-417D-AD24-14D71DFD119E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
